@@ -1,9 +1,13 @@
 TEMPLATE = app
 CONFIG += console
 QT -= gui
+QT += dbus
 
 SOURCES += \
-    main.cpp
+    main.cpp \
+    dbus/baulicht.cpp \
+    dbus/blink.cpp \
+    dbus/text.cpp
 
 HEADERS += \
     output/morse.h \

@@ -1,7 +1,7 @@
 #ifndef MORSEOUTPUT_H
 #define MORSEOUTPUT_H
 
-#include "Output.h"
+#include "output.h"
 
 class MorseOutput : public Output
 {

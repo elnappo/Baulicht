@@ -1,7 +1,7 @@
 #ifndef FLIPDOTOUTPUT_H
 #define FLIPDOTOUTPUT_H
 
-#include "Output.h"
+#include "output.h"
 
 class FlipDotOutput : public Output
 {

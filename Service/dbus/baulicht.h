@@ -2,7 +2,7 @@
 #define BAULICHT_H
 
 #include <QObject>
-#include <QList>
+#include <QStringList>
 
 class Baulicht : public QObject
 {
@@ -12,6 +12,7 @@ class Baulicht : public QObject
 
 public:
     explicit Baulicht(QObject *parent = 0);
+    ~Baulicht();
 
     enum Mode
     {
@@ -34,7 +35,12 @@ public slots:
 
 signals:
     void modeChanged(int mode);
+    void pausedChanged(bool paused);
     void textAdded(const QString& path);
+
+protected:
+    class Private;
+    Private* d;
 };
 
 #endif // BAULICHT_H
