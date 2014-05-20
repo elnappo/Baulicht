@@ -1,5 +1,5 @@
-#ifndef BAULICHT_H
-#define BAULICHT_H
+#ifndef TEXT_H
+#define TEXT_H
 
 #include <QObject>
 #include <QList>
@@ -11,6 +11,7 @@ class Text : public QObject
 
 public:
     explicit Text(QObject *parent = 0);
+    ~Text();
 
 public slots:
     void setText(const QString& text);
@@ -23,6 +24,13 @@ public slots:
     int repeat() const;
 
 signals:
+    void textChanged(const QString& text);
+    void intervalChanged(int interval);
+    void repeatChanged(int repeat);
+
+protected:
+    class Private;
+    Private *d;
 };
 
-#endif // BAULICHT_H
+#endif // TEXT_H
