@@ -16,8 +16,8 @@ public:
 
     enum Mode
     {
-        Text  = 0,
-        Blink = 1
+        TextMode  = 0,
+        BlinkMode = 1
     };
 
 public slots:

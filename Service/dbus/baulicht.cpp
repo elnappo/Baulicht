@@ -1,4 +1,9 @@
 #include "baulicht.h"
+#include "blink.h"
+#include "text.h"
+#include "../output/pluginmanager.h"
+
+#include <QDBusConnection>
 
 class Baulicht::Private
 {
@@ -13,6 +18,8 @@ public:
     int mode;
     bool paused;
     QStringList texts;
+
+    QList<Text*> childTexts;
 };
 
 Baulicht::Baulicht(QObject *parent)
@@ -54,7 +61,20 @@ bool Baulicht::paused() const
 
 QString Baulicht::addText(const QString &text, int interval, int repeat)
 {
-    return QString();
+    QString path = QString("/text/%1").arg(d->texts.size());
+
+    Text* object = new Text();
+    object->setText(text);
+    object->setInterval(interval);
+    object->setRepeat(repeat);
+
+    QDBusConnection connection = QDBusConnection::sessionBus();
+    connection.registerObject(path, object, QDBusConnection::ExportAllSlots);
+
+    d->childTexts.append(object);
+    d->texts.append(path);
+
+    return path;
 }
 
 void Baulicht::removeText(const QString &path)
