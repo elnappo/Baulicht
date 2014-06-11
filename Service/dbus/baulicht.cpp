@@ -1,17 +1,25 @@
 #include "baulicht.h"
 #include "blink.h"
 #include "text.h"
+#include "baulichtexecutor.h"
 #include "../output/pluginmanager.h"
 
 #include <QDBusConnection>
+#include <QTimer>
+#include <QDebug>
 
-class Baulicht::Private
+class Baulicht::Private : public QObject
 {
+    Q_OBJECT
+
 public:
     Private()
     : mode(0)
-    , paused(false)
+    , paused(true)
+    , currentPosition(0)
     {
+        connect(&timer, SIGNAL(timeout()), this, SLOT(timeout()));
+        timer.setInterval(300);
     }
 
     // Properties
@@ -19,13 +27,40 @@ public:
     bool paused;
     QStringList texts;
 
+    QString currentText;
+    int currentPosition;
+
+    QTimer timer;
     QList<Text*> childTexts;
+
+public slots:
+    void onPauseChanged();
+    void timeout();
 };
+
+void Baulicht::Private::onPauseChanged()
+{
+    timer.start();
+}
+
+void Baulicht::Private::timeout()
+{
+    const QChar c = currentText.at(currentPosition);
+    bool on = (c == '=');
+
+    qDebug() << (on ? "on" : "off");
+
+    currentPosition = ++currentPosition % currentText.length();
+
+    if (currentPosition == 0)
+        qDebug() << "-----------------------";
+}
 
 Baulicht::Baulicht(QObject *parent)
 : QObject(parent)
 , d(new Private)
 {
+    connect(this, SIGNAL(pausedChanged(bool)), d, SLOT(onPauseChanged()));
 }
 
 Baulicht::~Baulicht()
@@ -68,6 +103,9 @@ QString Baulicht::addText(const QString &text, int interval, int repeat)
     object->setInterval(interval);
     object->setRepeat(repeat);
 
+    BaulichtExecutor e;
+    d->currentText = e.convertToMorse(text);
+
     QDBusConnection connection = QDBusConnection::sessionBus();
     connection.registerObject(path, object, QDBusConnection::ExportAllSlots);
 
@@ -90,3 +128,15 @@ void Baulicht::clear()
 {
     d->texts.clear();
 }
+
+void Baulicht::start()
+{
+    setPaused(false);
+}
+
+void Baulicht::stop()
+{
+    setPaused(true);
+}
+
+#include "baulicht.moc"
