@@ -8,7 +8,8 @@ SOURCES += \
     dbus/baulicht.cpp \
     dbus/blink.cpp \
     dbus/text.cpp \
-    output/pluginmanager.cpp
+    output/pluginmanager.cpp \
+    baulichtexecutor.cpp
 
 HEADERS += \
     output/morse.h \
@@ -17,6 +18,7 @@ HEADERS += \
     dbus/baulicht.h \
     dbus/blink.h \
     dbus/text.h \
-    output/pluginmanager.h
+    output/pluginmanager.h \
+    baulichtexecutor.h
 
 
