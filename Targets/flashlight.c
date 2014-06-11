@@ -70,9 +70,8 @@ int main(int argc, char **argv)
         load = 100 + load * 100 + i;
 
         for (i=0; i < sizeof(hearth)/sizeof(hearth[0]); i++) {
-            if (ioctl(consolefd, KDGETLED, &led)
-                || ioctl(consolefd, KDSETLED,
-                         (led & ~chosenled) | chosenled * hearth[i])) {
+            if (ioctl(consolefd, KDGETLED, &led) || ioctl(consolefd, KDSETLED, (led & ~chosenled) | chosenled * hearth[i]))
+            {
                 fprintf(stderr, "%s: ioctl(): %s\n", prgname, strerror(errno));
                 exit(2);
             }
