@@ -7,14 +7,16 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-lg-6 col-md-6">
+        <div class="col-lg-10 col-md-10">
             <h2>Deine Nachricht</h2>
+            <p>Nach der Überprüfung wird deine Nachricht über Augsburg gemorst.</p>
             <hr />
-            <form class="form-horizontal" role="form" action="">
+            <form class="form-horizontal" role="form" method="post" action="">
+                {% csrf_token %}
                 {{ form|bootstrap_horizontal}}
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <input type="button" class="btn btn-primary" value="Submit" />
+                        <input type="submit" class="btn btn-primary" value="Submit" />
                     </div>
                 </div>
             </form>

@@ -11,7 +11,8 @@ SOURCES += \
     dbus/blink.cpp \
     dbus/text.cpp \
     output/pluginmanager.cpp \
-    output/Morse.cpp
+    output/Morse.cpp \
+    baulichtexecutor.cpp
 
 HEADERS += \
     output/morse.h \
@@ -20,4 +21,7 @@ HEADERS += \
     dbus/baulicht.h \
     dbus/blink.h \
     dbus/text.h \
-    output/pluginmanager.h
+    output/pluginmanager.h \
+    baulichtexecutor.h
+
+
