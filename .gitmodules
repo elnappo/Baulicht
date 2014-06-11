@@ -1,0 +1,3 @@
+[submodule "3rdParty/BBBIOlib"]
+	path = 3rdParty/BBBIOlib
+	url = https://github.com/VegetableAvenger/BBBIOlib
