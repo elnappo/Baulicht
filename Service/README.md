@@ -1,4 +1,4 @@
-## CLI
+## Service
 
 http://www.cl.cam.ac.uk/projects/raspberrypi/tutorials/robot/morse_code/
 CODE = {' ': ' ', 
