@@ -128,7 +128,7 @@ void BaulichtExecutor::initAlphabet()
 
 void BaulichtExecutor::initIntervals()
 {
-    int dit = 500;
+    int dit = 200;
     m_intervals.insert('.', dit);
     m_intervals.insert('-', dit*3);
     m_intervals.insert(' ', dit*7);

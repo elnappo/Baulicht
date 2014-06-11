@@ -33,6 +33,9 @@ public slots:
 
     void clear();
 
+    void start();
+    void stop();
+
 signals:
     void modeChanged(int mode);
     void pausedChanged(bool paused);
