@@ -26,8 +26,6 @@ int main(int argc, char* argv[])
 
     BaulichtExecutor executor;
     QString code = executor.convertToMorse("Morse Code");
-    qDebug() << "Morse code:" << code;
-    qDebug() << "Morse code:" << QString("===_===___===_===_===___=_===_=___=_=_=___=_______===_=_===_=___===_===_===___===_=_=___=");
 
     return app.exec();
 }
