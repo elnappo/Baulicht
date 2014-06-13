@@ -111,7 +111,7 @@ QString Baulicht::addText(const QString &text, int interval, int repeat)
     BaulichtExecutor e;
     d->currentText = e.convertToMorse(text);
 
-    QDBusConnection connection = QDBusConnection::systemBus();
+    QDBusConnection connection = QDBusConnection::sessionBus();
     connection.registerObject(path, object, QDBusConnection::ExportAllSlots);
 
     d->childTexts.append(object);
