@@ -9,7 +9,8 @@ SOURCES += \
     dbus/blink.cpp \
     dbus/text.cpp \
     output/pluginmanager.cpp \
-    baulichtexecutor.cpp
+    baulichtexecutor.cpp \
+    output/onoff_gpio.cpp
 
 HEADERS += \
     output/morse.h \
@@ -19,6 +20,7 @@ HEADERS += \
     dbus/blink.h \
     dbus/text.h \
     output/pluginmanager.h \
-    baulichtexecutor.h
+    baulichtexecutor.h \
+    output/onoff_gpio.h
 
 

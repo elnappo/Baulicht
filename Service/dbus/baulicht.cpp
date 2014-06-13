@@ -8,6 +8,8 @@
 #include <QTimer>
 #include <QDebug>
 
+#include "../output/onoff_gpio.h"
+
 class Baulicht::Private : public QObject
 {
     Q_OBJECT
@@ -33,6 +35,8 @@ public:
     QTimer timer;
     QList<Text*> childTexts;
 
+    OnOffMorse morse;
+
 public slots:
     void onPauseChanged();
     void timeout();
@@ -49,6 +53,7 @@ void Baulicht::Private::timeout()
     bool on = (c == '=');
 
     qDebug() << (on ? "on" : "off");
+    morse.setOn(on);
 
     currentPosition = ++currentPosition % currentText.length();
 
@@ -106,7 +111,7 @@ QString Baulicht::addText(const QString &text, int interval, int repeat)
     BaulichtExecutor e;
     d->currentText = e.convertToMorse(text);
 
-    QDBusConnection connection = QDBusConnection::sessionBus();
+    QDBusConnection connection = QDBusConnection::systemBus();
     connection.registerObject(path, object, QDBusConnection::ExportAllSlots);
 
     d->childTexts.append(object);

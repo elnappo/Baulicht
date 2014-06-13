@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
 
     const QString& serviceName = "de.naptower.Baulicht";
 
-    QDBusConnection connection = QDBusConnection::sessionBus();
+    QDBusConnection connection = QDBusConnection::systemBus();
     if (!connection.registerService(serviceName)) {
         qDebug() << "Failed to register service" << serviceName << ":" << connection.lastError().message();
         return 1;
@@ -26,8 +26,6 @@ int main(int argc, char* argv[])
 
     BaulichtExecutor executor;
     QString code = executor.convertToMorse("Morse Code");
-    qDebug() << "Morse code:" << code;
-    qDebug() << "Morse code:" << QString("===_===___===_===_===___=_===_=___=_=_=___=_______===_=_===_=___===_===_===___===_=_=___=");
 
     return app.exec();
 }
