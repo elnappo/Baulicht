@@ -8,7 +8,7 @@ OnOffMorse::OnOffMorse()
     exportPin(pin);
     setDirection(pin, "out");
 
-    QString path = QString("/sys/class/gpio%1/value").arg(pin);
+    QString path = QString("/sys/class/gpio/gpio%1/value").arg(pin);
     m_file.setFileName(path);
     if (!m_file.open(QIODevice::WriteOnly)) {
         qDebug() << "Failed to open pin value setter:" << m_file.errorString();
@@ -26,7 +26,7 @@ void OnOffMorse::setOn(bool setOn)
 
 void OnOffMorse::exportPin(int pin)
 {
-    QString path = QString("/sys/class/gip/export");
+    QString path = QString("/sys/class/gpio/export");
     QFile file(path);
     if (file.open(QIODevice::WriteOnly)) {
         file.write( QString::number(pin).toLatin1() );
@@ -37,7 +37,7 @@ void OnOffMorse::exportPin(int pin)
 
 void OnOffMorse::setDirection(int pin, const QByteArray &direction)
 {
-    QString path = QString("/sys/class/gpio%1/value").arg(pin);
+    QString path = QString("/sys/class/gpio/gpio%1/direction").arg(pin);
     QFile file(path);
     if (file.open(QIODevice::WriteOnly)) {
         file.write(direction);
