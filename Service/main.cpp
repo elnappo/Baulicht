@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
 
     const QString& serviceName = "de.naptower.Baulicht";
 
-    QDBusConnection connection = QDBusConnection::sessionBus();
+    QDBusConnection connection = QDBusConnection::systemBus();
     if (!connection.registerService(serviceName)) {
         qDebug() << "Failed to register service" << serviceName << ":" << connection.lastError().message();
         return 1;
