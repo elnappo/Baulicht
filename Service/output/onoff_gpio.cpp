@@ -4,7 +4,7 @@
 
 OnOffMorse::OnOffMorse()
 {
-    int pin = 30;
+    int pin = 17;
     exportPin(pin);
     setDirection(pin, "out");
 
