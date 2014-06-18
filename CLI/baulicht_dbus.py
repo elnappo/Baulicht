@@ -77,7 +77,7 @@ class BaulichText(object):
         self._text_object = self._bus.get_object(self._namespace, self._path)
 
     def __str__(self):
-        return self._path, self._text_object.text()
+        return "[%s] %s" % (self._path, self.text())
 
     def text(self):
         return self._text_object.text()
