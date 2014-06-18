@@ -18,38 +18,35 @@ parser.add_argument("--status", action="store_true", help="Stop morse/blink")
 
 args = parser.parse_args()
 
+from .baulicht_dbus import BaulichtDbus
 
-import dbus
-bus = dbus.SessionBus()
-root_object = bus.get_object("de.naptower.Baulicht", "/")
+baulicht = BaulichtDbus()
 
 if args.status:
     print("Current System Status:")
-    paused = root_object.paused()
-    mode = root_object.mode()
-    #speed = root_object.
+    paused = baulicht.paused
+    mode = baulicht.mode
+    #speed = baulicht.speed
     print("Paused: %s" % (paused))
     print("Mode: %s" % (mode))
+    # print("Speed: %s" % (speed))
     
 if args.add:
-    path = root_object.addText(args.add , 1, 1)
+    path = baulicht.add_text(args.add)
     print('Added "%s". Path is "%s"' % (args.add, path))
     
 if args.pause == "on":
-    root_object.setPaused(False)
-    print("Start morse")
+    baulicht.paused = True
+    print("Stop morse")
+
 elif args.pause == "off":
-    root_object.setPaused(True)
+    baulicht.paused = False
     print("Stop morse")
     
 if args.speed:
-    root_object.setSpeed(args.speed)
+    baulicht.speed = args.speed
     print("Set speed to %d" % (args.speed))
 
-if args.mode == "text":
-    root_object.setMode(0)
+if args.mode:
+    baulicht.mode = args.mode
     print("Set mode to %s" % (args.mode))
-elif args.mode == "blink":
-    root_object.setMode(1)
-    print("Set mode to %s" % (args.mode))
-    
