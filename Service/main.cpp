@@ -1,5 +1,4 @@
 #include "dbus/baulicht.h"
-#include "baulichtexecutor.h"
 
 #include <QCoreApplication>
 #include <QDBusConnection>
@@ -23,9 +22,6 @@ int main(int argc, char* argv[])
         qDebug() << "Failed to register object at /:" << connection.lastError().message();
         return 1;
     }
-
-    BaulichtExecutor executor;
-    QString code = executor.convertToMorse("Morse Code");
 
     return app.exec();
 }
