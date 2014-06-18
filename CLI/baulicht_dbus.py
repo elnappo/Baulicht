@@ -11,7 +11,11 @@ class BaulichtDbus(object):
         return self._root_object.addText(message, 1, 1)
 
     def list_text(self):
-        return list()
+        texts = list()
+        for text in self._root_object.texts():
+            texts.append(BaulichText(path=text))
+
+        print(texts)
 
     def stop(self):
         self._root_object.stop()
@@ -62,3 +66,19 @@ class BaulichtDbus(object):
             raise ValueError('Only "text or "blink are allowd!')
 
         self._root_object.mode(int_value)
+
+
+class BaulichText(object):
+
+    def __init__(self, path, namespace="de.naptower.Baulicht"):
+        self._bus = dbus.SessionBus()
+        self._text_object = self._bus.get_object(namespace, path)
+
+    def __str__(self):
+        return self._text_object.text()
+
+    def text(self):
+        return self._text_object.text()
+
+
+
