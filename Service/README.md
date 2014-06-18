@@ -1,12 +1,11 @@
 # Service
 ## Install
-add following to /etc/dbus-1/system.conf
-```
-<policy>
-    ...
-    <allow own="org.testobj.service"/>
-</policy>
-```	
+
+    $ apt-get install xvfb
+    $ Xvfb :1 -screen 0 1x1x8 &
+    $ export DISPLAY=:1
+    $ ./service
+    
 ## Morse code
 http://www.cl.cam.ac.uk/projects/raspberrypi/tutorials/robot/morse_code/
 ```
