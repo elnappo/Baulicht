@@ -47,7 +47,10 @@ class BaulichtDbus(object):
 
     @property
     def mode(self):
-        return bool(self._root_object.mode())
+        if self._root_object.mode() == 0:
+            return "text"
+        elif self._root_object.mode() == 1:
+            return "blink"
 
     @mode.setter
     def mode(self, value):

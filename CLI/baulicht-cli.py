@@ -18,7 +18,7 @@ parser.add_argument("--status", action="store_true", help="Stop morse/blink")
 
 args = parser.parse_args()
 
-from .baulicht_dbus import BaulichtDbus
+from baulicht_dbus import BaulichtDbus
 
 baulicht = BaulichtDbus()
 
