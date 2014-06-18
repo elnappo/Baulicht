@@ -4,7 +4,7 @@
 
 OnOffMorse::OnOffMorse()
 {
-    int pin = 30;
+    int pin = 17;
     exportPin(pin);
     setDirection(pin, "out");
 
@@ -21,7 +21,13 @@ OnOffMorse::~OnOffMorse()
 
 void OnOffMorse::setOn(bool setOn)
 {
-    m_file.write(setOn ? "1" : "0");
+    QString path = QString("/sys/class/gpio/gpio%1/value").arg(17);
+    QFile file(path);
+    if (file.open(QIODevice::WriteOnly)) {
+        file.write(setOn ? "1" : "0");
+    } else {
+        qDebug() << "Failed to set value on pin:" << file.errorString();
+    }
 }
 
 void OnOffMorse::exportPin(int pin)
