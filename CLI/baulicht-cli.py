@@ -30,7 +30,10 @@ if args.status:
     print("Paused: %s" % (paused))
     print("Mode: %s" % (mode))
     # print("Speed: %s" % (speed))
-    
+
+if args.list:
+    baulicht.list_text()
+
 if args.add:
     path = baulicht.add_text(args.add)
     print('Added "%s". Path is "%s"' % (args.add, path))
