@@ -40,6 +40,7 @@ signals:
     void modeChanged(int mode);
     void pausedChanged(bool paused);
     void textAdded(const QString& path);
+    void speedChanged(int milliseconds);
 
 protected:
     class Private;

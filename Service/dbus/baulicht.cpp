@@ -99,6 +99,19 @@ bool Baulicht::paused() const
     return d->paused;
 }
 
+void Baulicht::setSpeed(int milliseconds)
+{
+    if (d->timer.interval() != milliseconds) {
+        d->timer.setInterval(milliseconds);
+        emit speedChanged(milliseconds);
+    }
+}
+
+int Baulicht::speed() const
+{
+    return d->timer.interval();
+}
+
 QString Baulicht::addText(const QString &text, int interval, int repeat)
 {
     QString path = QString("/text/%1").arg(d->texts.size());
