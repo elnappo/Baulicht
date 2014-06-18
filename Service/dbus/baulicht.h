@@ -27,6 +27,9 @@ public slots:
     void setPaused(bool paused);
     bool paused() const;
 
+    void setSpeed(int milliseconds);
+    int speed() const;
+
     QString addText(const QString& text, int interval, int repeat);
     void removeText(const QString& path);
     QStringList texts() const;

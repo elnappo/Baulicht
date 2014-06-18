@@ -17,7 +17,6 @@ class Baulicht::Private : public QObject
 public:
     Private()
     : mode(0)
-    , paused(true)
     , currentPosition(0)
     {
         connect(&timer, SIGNAL(timeout()), this, SLOT(timeout()));
@@ -88,15 +87,19 @@ int Baulicht::mode() const
 
 void Baulicht::setPaused(bool paused)
 {
-    if (d->paused != paused) {
-        d->paused = paused;
+    if (d->timer.isActive() != paused) {
+        if (paused)
+            d->timer.stop();
+        else
+            d->timer.start();
+
         emit pausedChanged(paused);
     }
 }
 
 bool Baulicht::paused() const
 {
-    return d->paused;
+    return d->timer.isActive();
 }
 
 void Baulicht::setSpeed(int milliseconds)
