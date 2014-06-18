@@ -122,6 +122,14 @@ QString Baulicht::addText(const QString &text, int interval, int repeat)
 
 void Baulicht::removeText(const QString &path)
 {
+    int pos = d->texts.indexOf(path);
+    if (pos == -1) {
+        qDebug() << "Unable to remove invalid path" << path;
+        return;
+    }
+
+    d->texts.removeAt(pos);
+    d->childTexts.removeAt(pos);
 }
 
 QStringList Baulicht::texts() const
