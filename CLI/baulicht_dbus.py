@@ -15,7 +15,7 @@ class BaulichtDbus(object):
         for text in self._root_object.texts():
             texts.append(BaulichText(path=text))
 
-        print(texts)
+        return texts
 
     def stop(self):
         self._root_object.stop()
@@ -71,14 +71,13 @@ class BaulichtDbus(object):
 class BaulichText(object):
 
     def __init__(self, path, namespace="de.naptower.Baulicht"):
+        self._path = path
+        self._namespace = namespace
         self._bus = dbus.SessionBus()
-        self._text_object = self._bus.get_object(namespace, path)
+        self._text_object = self._bus.get_object(self._namespace, self._path)
 
     def __str__(self):
-        return self._text_object.text()
+        return "[%s] %s" % (self._path, self.text())
 
     def text(self):
         return self._text_object.text()
-
-
-

@@ -32,7 +32,8 @@ if args.status:
     # print("Speed: %s" % (speed))
 
 if args.list:
-    baulicht.list_text()
+    for text in baulicht.list_text():
+        print(text)
 
 if args.add:
     path = baulicht.add_text(args.add)
