@@ -4,18 +4,42 @@ import dbus
 class BaulichtDbus(object):
 
     def __init__(self, namespace="de.naptower.Baulicht"):
+        self._namespace = namespace
         self._bus = dbus.SessionBus()
-        self._root_object = self._bus.get_object(namespace, "/")
+        self._root_object = self._bus.get_object(self._namespace, "/")
+
+    def __str__(self):
+        return "Baulicht Dbus at %s" % (self._namespace)
 
     def add_text(self, message):
-        return self._root_object.addText(message, 1, 1)
+        self._root_object.addText(message, 1, 1)
 
     def list_text(self):
         texts = list()
-        for text in self._root_object.texts():
-            texts.append(BaulichText(session_bus=self._bus, path=text))
+        for text_paths in self._root_object.texts():
+            texts.append(BaulichText(session_bus=self._bus, path=text_paths, namespace=self._namespace))
 
         return texts
+
+    def get_text(self, text):
+        if isinstance(text, BaulichText):
+            path = text._path
+        elif isinstance(text, str):
+            path = text
+        elif isinstance(text, int):
+            path = "/text/%d" % (text)
+
+        return BaulichText(session_bus=self._bus, path=path, namespace=self._namespace)
+
+    def remove_text(self, text):
+        if isinstance(text, BaulichText):
+            path = text._path
+        elif isinstance(text, str):
+            path = text
+        elif isinstance(text, int):
+            path = "/text/%d" % (text)
+
+        self._root_object.removeText(path)
 
     def stop(self):
         self._root_object.stop()
@@ -81,3 +105,6 @@ class BaulichText(object):
 
     def text(self):
         return self._text_object.text()
+
+    def repeat(self):
+        return self._text_object.repeat()
