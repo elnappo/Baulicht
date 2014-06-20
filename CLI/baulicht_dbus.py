@@ -30,7 +30,7 @@ class BaulichtDbus(object):
     def list_text(self):
         texts = list()
         for text_paths in self._root_object.texts():
-            texts.append(BaulichText(session_bus=self._bus, path=text_paths, namespace=self._namespace))
+            texts.append(BaulichText(path=text_paths, namespace=self._namespace))
 
         return texts
 
