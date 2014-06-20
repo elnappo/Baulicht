@@ -2,6 +2,7 @@
 #include "blink.h"
 #include "text.h"
 #include "baulichtexecutor.h"
+#include "settings.h"
 #include "../output/pluginmanager.h"
 
 #include <QDBusConnection>
@@ -16,20 +17,27 @@ class Baulicht::Private : public QObject
 
 public:
     Private()
-    : mode(0)
-    , currentPosition(0)
+    : settings(NULL)
+    , mode(0)
+    , currentTextObject(-1)
+    , currentTextPosition(0)
     {
         connect(&timer, SIGNAL(timeout()), this, SLOT(timeout()));
         timer.setInterval(300);
     }
 
     // Properties
+    Settings *settings;
+
     int mode;
     bool paused;
     QStringList texts;
 
     QString currentText;
-    int currentPosition;
+    int currentTextPosition;
+    int currentTextObject;
+
+    BaulichtExecutor executor;
 
     QTimer timer;
     QList<Text*> childTexts;
@@ -39,6 +47,7 @@ public:
 public slots:
     void onPauseChanged();
     void timeout();
+    void onDitChanged(int dit);
 };
 
 void Baulicht::Private::onPauseChanged()
@@ -48,16 +57,43 @@ void Baulicht::Private::onPauseChanged()
 
 void Baulicht::Private::timeout()
 {
-    const QChar c = currentText.at(currentPosition);
+    // Reset to nothing if there are no texts
+    if (childTexts.isEmpty()) {
+        currentTextObject = -1;
+        return;
+    } else if (currentTextObject == -1) {
+        currentTextObject = 0;
+        currentTextPosition = 0;
+        currentText = executor.convertToMorse(childTexts.at(0)->text());
+
+        qDebug() << "Current text is now" << childTexts.at(0)->text();
+    }
+
+    const QChar c = currentText.at(currentTextPosition);
     bool on = (c == '=');
 
     qDebug() << (on ? "on" : "off");
     morse.setOn(on);
 
-    currentPosition = ++currentPosition % currentText.length();
+    // Text length exceeded, take the next text
+    if (++currentTextPosition >= currentText.size()) {
 
-    if (currentPosition == 0)
-        qDebug() << "-----------------------";
+        // Text objects exceeded, start at the beginning
+        if (++currentTextObject >= childTexts.size()) {
+            currentTextObject = -1;
+        } else {
+            // Update the current text
+            currentText = executor.convertToMorse(childTexts.at(currentTextObject)->text());
+            currentTextPosition = 0;
+
+            qDebug() << "Current text is now" << childTexts.at(currentTextObject)->text();
+        }
+    }
+}
+
+void Baulicht::Private::onDitChanged(int dit)
+{
+    timer.setInterval(dit);
 }
 
 Baulicht::Baulicht(QObject *parent)
@@ -70,6 +106,30 @@ Baulicht::Baulicht(QObject *parent)
 Baulicht::~Baulicht()
 {
     delete d;
+}
+
+void Baulicht::setSettings(Settings *settings)
+{
+    if (d->settings == settings)
+        return;
+
+    if (d->settings) {
+        disconnect(settings, SIGNAL(ditChanged(int)), d, SLOT(onDitChanged(int)));
+    }
+
+    d->settings = settings;
+
+    if (d->settings) {
+        connect(settings, SIGNAL(ditChanged(int)), d, SLOT(onDitChanged(int)));
+
+        // Update the value immediately
+        d->onDitChanged(settings->dit());
+    }
+}
+
+Settings *Baulicht::settings() const
+{
+    return d->settings;
 }
 
 void Baulicht::setMode(int mode)
@@ -87,7 +147,7 @@ int Baulicht::mode() const
 
 void Baulicht::setPaused(bool paused)
 {
-    if (d->timer.isActive() != paused) {
+    if (d->timer.isActive() == paused) {
         if (paused)
             d->timer.stop();
         else
@@ -99,29 +159,15 @@ void Baulicht::setPaused(bool paused)
 
 bool Baulicht::paused() const
 {
-    return d->timer.isActive();
+    return !d->timer.isActive();
 }
 
-void Baulicht::setSpeed(int milliseconds)
-{
-    if (d->timer.interval() != milliseconds) {
-        d->timer.setInterval(milliseconds);
-        emit speedChanged(milliseconds);
-    }
-}
-
-int Baulicht::speed() const
-{
-    return d->timer.interval();
-}
-
-QString Baulicht::addText(const QString &text, int interval, int repeat)
+QString Baulicht::addText(const QString &text, int repeat)
 {
     QString path = QString("/text/%1").arg(d->texts.size());
 
     Text* object = new Text();
     object->setText(text);
-    object->setInterval(interval);
     object->setRepeat(repeat);
 
     BaulichtExecutor e;
