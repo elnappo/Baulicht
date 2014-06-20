@@ -9,7 +9,7 @@ INSTALL_DIR = /opt/baulicht
 target.path = $$INSTALL_DIR
 
 service.files = de.naptower.Baulicht.service
-service.path = $$INSTALL_DIR
+service.path = /usr/share/dbus-1/services
 
 INSTALLS += target service
 
