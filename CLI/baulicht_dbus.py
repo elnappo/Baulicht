@@ -35,7 +35,7 @@ class BaulichtDbus(object):
         return texts
 
     def get_text(self, text):
-        return BaulichText(session_bus=self._bus, path=self._get_text_path(text), namespace=self._namespace)
+        return BaulichText(path=self._get_text_path(text), namespace=self._namespace)
 
     def remove_text(self, text):
         self._root_object.removeText(self._get_text_path(text))
