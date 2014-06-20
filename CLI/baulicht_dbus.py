@@ -12,7 +12,7 @@ class BaulichtDbus(object):
         return "Baulicht Dbus at %s" % (self._namespace)
 
     def add_text(self, message):
-        self._root_object.addText(message, -1)
+        return self._root_object.addText(message, -1)
 
     def list_text(self):
         texts = list()
