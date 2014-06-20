@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load bootstrap %}
+
+{% block title %}Baulicht{% endblock %}
+
+{% block content %}
+    <h2>Warteschlange</h2>
+    <p>Diese Nachrichten warten auf ihre Freischaltung.</p>
+<table class="table">
+    <thead>
+        <tr>
+          <th>Name</th>
+          <th>Nachricht</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for object in object_list %}
+    <tr>
+        <td>
+        {% if object.name %}
+            {{ object.name }}
+        {% else %}
+            Anonym
+        {% endif %}
+        </td>
+        <td>{{ object.text }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

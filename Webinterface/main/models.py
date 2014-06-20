@@ -10,5 +10,6 @@ class Message(models.Model):
     text = models.TextField(max_length=512)
 
     dbus_path = models.CharField(blank=True, default="", max_length=32)
+    accepted = models.BooleanField(default=False)
     is_active = models.NullBooleanField(null=True, default=None)
     activated_at = models.DateTimeField(null=True)

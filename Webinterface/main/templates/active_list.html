@@ -18,4 +18,23 @@
     </tr>
     {% endfor %}
 </table>
+
+<table class="table">
+    <thead>
+        <tr>
+          <th>Name</th>
+          <th>Path</th>
+          <th>Nachricht</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for text in texts %}
+    <tr>
+        <td></td>
+        <td>{{ text.path }}</td>
+        <td>{{ text.text }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
