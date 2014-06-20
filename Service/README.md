@@ -1,6 +1,7 @@
 # Service
 ## Install
 add user to gpio group
+
     $ qmake -r
     $ make
     $ sudo make install
