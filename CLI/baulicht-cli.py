@@ -1,6 +1,5 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
-import os
 import argparse
 
 from baulicht_dbus import BaulichtDbus, BaulichSettings
@@ -23,8 +22,6 @@ if __name__ == "__main__":
     parser.add_argument("--start", action="store_true", help="Start morse/blink")
     parser.add_argument("--stop", action="store_true", help="Stop morse/blink")
     args = parser.parse_args()
-
-    os.environ["DISPLAY"] = "=:1"
 
     baulicht = BaulichtDbus()
     baulicht_settings = BaulichSettings()
