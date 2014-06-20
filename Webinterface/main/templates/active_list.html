@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load bootstrap %}
+
+{% block title %}Baulicht{% endblock %}
+
+{% block content %}
+<table class="table">
+    <tr>
+        <th>Path</th>
+        <th>Nachricht</th>
+    </tr>
+    {% for text in texts %}
+    <tr>
+        <td>{{ text.path }}</td>
+        <td>{{ text.text }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

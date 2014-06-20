@@ -10,4 +10,5 @@ urlpatterns = patterns('',
 
     url(r'^create/$', MessageCreate.as_view(), name='create'),
     url(r'^list/$', MessageList.as_view(), name='list'),
+    url(r'^active$', 'main.views.active_messeages', name='active_messeages'),
 )
