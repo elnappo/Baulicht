@@ -3,10 +3,11 @@ import dbus
 
 class BaulichtDbus(object):
 
-    def __init__(self, namespace="de.naptower.Baulicht"):
-        self._namespace = namespace
+    def __init__(self, namespace="de.naptower.Baulicht", path="/"):
         self._bus = dbus.SessionBus()
-        self._root_object = self._bus.get_object(self._namespace, "/")
+        self._namespace = namespace
+        self._path = path
+        self._root_object = self._bus.get_object(self._namespace, self._path)
 
     def __str__(self):
         return "Baulicht Dbus at %s" % (self._namespace)
@@ -96,10 +97,34 @@ class BaulichtDbus(object):
         self._root_object.mode(int_value)
 
 
+class BaulichSettings(object):
+    def __init__(self, path="/settings", namespace="de.naptower.Baulicht"):
+        self._bus = dbus.SessionBus()
+        self._path = path
+        self._namespace = namespace
+        self._settings_object = self._bus.get_object(self._namespace, self._path)
+
+    @property
+    def dit(self):
+        return self._settings_object.dit()
+
+    @dit.setter
+    def dit(self, value):
+        self._settings_object.setDit(value)
+
+    @property
+    def text_spacing(self):
+        return self._settings_object.textSpacing()
+
+    @text_spacing.setter
+    def text_spacing(self, value):
+        self._settings_object.setTextSpacing(value)
+
+
 class BaulichText(object):
 
-    def __init__(self, session_bus, path, namespace="de.naptower.Baulicht"):
-        self._bus = session_bus
+    def __init__(self, path, namespace="de.naptower.Baulicht"):
+        self._bus =  dbus.SessionBus()
         self._path = path
         self._namespace = namespace
         self._text_object = self._bus.get_object(self._namespace, self._path)
@@ -107,8 +132,14 @@ class BaulichText(object):
     def __str__(self):
         return "[%s] %s" % (self._path, self.text())
 
+    @property
     def text(self):
         return self._text_object.text()
 
+    @property
     def repeat(self):
         return self._text_object.repeat()
+
+    @property
+    def created(self):
+        return self._text_object.creationTimestamp()
