@@ -4,6 +4,9 @@
 #include <QObject>
 #include <QList>
 
+/**
+ * @brief The Text class
+ */
 class Text : public QObject
 {
     Q_OBJECT
@@ -17,15 +20,11 @@ public slots:
     void setText(const QString& text);
     QString text() const;
 
-    void setInterval(int interval);
-    int interval() const;
-
     void setRepeat(int repeat);
     int repeat() const;
 
 signals:
     void textChanged(const QString& text);
-    void intervalChanged(int interval);
     void repeatChanged(int repeat);
 
 protected:

@@ -4,14 +4,12 @@ class Text::Private
 {
 public:
     Private()
-    : interval(0)
-    , repeat(0)
+    : repeat(0)
     {
     }
 
     // Properties
     QString text;
-    int interval;
     int repeat;
 };
 
@@ -37,19 +35,6 @@ void Text::setText(const QString &text)
 QString Text::text() const
 {
     return d->text;
-}
-
-void Text::setInterval(int interval)
-{
-    if (d->interval != interval) {
-        d->interval = interval;
-        emit intervalChanged(interval);
-    }
-}
-
-int Text::interval() const
-{
-    return d->interval;
 }
 
 void Text::setRepeat(int repeat)

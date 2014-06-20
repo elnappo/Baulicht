@@ -10,7 +10,8 @@ SOURCES += \
     dbus/text.cpp \
     output/pluginmanager.cpp \
     baulichtexecutor.cpp \
-    output/onoff_gpio.cpp
+    output/onoff_gpio.cpp \
+    dbus/settings.cpp
 
 HEADERS += \
     output/morse.h \
@@ -21,6 +22,7 @@ HEADERS += \
     dbus/text.h \
     output/pluginmanager.h \
     baulichtexecutor.h \
-    output/onoff_gpio.h
+    output/onoff_gpio.h \
+    dbus/settings.h
 
 
