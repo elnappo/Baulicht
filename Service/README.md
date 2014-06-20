@@ -1,10 +1,11 @@
 # Service
 ## Install
+add user to gpio group
+    $ qmake -r
+    $ make
+    $ sudo make install
+    $ sudo usermode -aG gpio pi
 
-    $ apt-get install xvfb
-    $ Xvfb :1 -screen 0 1x1x8 &
-    $ export DISPLAY=:1
-    $ ./service
     
 ## Morse code
 http://www.cl.cam.ac.uk/projects/raspberrypi/tutorials/robot/morse_code/
