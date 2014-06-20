@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 
 from main.views import MessageCreate, Queue
 
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'glimpse.views.home', name='home'),
@@ -12,5 +13,4 @@ urlpatterns = patterns('',
     url(r'^queue/$', Queue.as_view(), name='queue'),
     # url(r'^active$', 'main.views.active_messeages', name='active'),
     url(r'^active$', Queue.as_view(), name='active'),
-
 )
