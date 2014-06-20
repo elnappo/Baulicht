@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 import argparse
 
+from baulicht_dbus import BaulichtDbus
+
 
 if __name__ == "__main__":
 
@@ -20,9 +22,6 @@ if __name__ == "__main__":
     parser.add_argument("--start", action="store_true", help="Start morse/blink")
     parser.add_argument("--stop", action="store_true", help="Stop morse/blink")
     args = parser.parse_args()
-
-
-    from baulicht_dbus import BaulichtDbus
 
     baulicht = BaulichtDbus()
 
