@@ -14,7 +14,7 @@ class BaulichtDbus(object):
 
     def _get_text_path(self, text):
         if isinstance(text, BaulichText):
-            path = text._path
+            path = text.path
         elif isinstance(text, str):
             path = text
         elif isinstance(text, int):
@@ -119,12 +119,12 @@ class BaulichText(object):
 
     def __init__(self, path, namespace="de.naptower.Baulicht"):
         self._bus =  dbus.SessionBus()
-        self._path = path
+        self.path = path
         self._namespace = namespace
-        self._text_object = self._bus.get_object(self._namespace, self._path)
+        self._text_object = self._bus.get_object(self._namespace, self.path)
 
     def __str__(self):
-        return "[%s] %s" % (self._path, self.text())
+        return "[%s] %s" % (self.path, self.text())
 
     @property
     def text(self):
