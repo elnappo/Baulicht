@@ -12,6 +12,18 @@ class BaulichtDbus(object):
     def __str__(self):
         return "Baulicht Dbus at %s" % (self._namespace)
 
+    def _get_text_path(self, text):
+        if isinstance(text, BaulichText):
+            path = text._path
+        elif isinstance(text, str):
+            path = text
+        elif isinstance(text, int):
+            path = "/text/%d" % (text)
+        else:
+            raise TypeError("text must be an object of one of these classes: BaulichtText, int or str")
+
+        return path
+
     def add_text(self, message):
         return self._root_object.addText(message, -1)
 
@@ -23,28 +35,10 @@ class BaulichtDbus(object):
         return texts
 
     def get_text(self, text):
-        if isinstance(text, BaulichText):
-            path = text._path
-        elif isinstance(text, str):
-            path = text
-        elif isinstance(text, int):
-            path = "/text/%d" % (text)
-        else:
-            raise TypeError("text must be an object of one of these classes: BaulichtText, int or str")
-
-        return BaulichText(session_bus=self._bus, path=path, namespace=self._namespace)
+        return BaulichText(session_bus=self._bus, path=self._get_text_path(text), namespace=self._namespace)
 
     def remove_text(self, text):
-        if isinstance(text, BaulichText):
-            path = text._path
-        elif isinstance(text, str):
-            path = text
-        elif isinstance(text, int):
-            path = "/text/%d" % (text)
-        else:
-            raise TypeError("text must be an object of one of these classes: BaulichtText, int or str")
-
-        self._root_object.removeText(path)
+        self._root_object.removeText(self._get_text_path(text))
 
     def stop(self):
         self._root_object.stop()
