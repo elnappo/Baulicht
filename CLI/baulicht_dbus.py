@@ -12,7 +12,7 @@ class BaulichtDbus(object):
         return "Baulicht Dbus at %s" % (self._namespace)
 
     def add_text(self, message):
-        self._root_object.addText(message, 1, 1)
+        self._root_object.addText(message, -1)
 
     def list_text(self):
         texts = list()
@@ -28,6 +28,8 @@ class BaulichtDbus(object):
             path = text
         elif isinstance(text, int):
             path = "/text/%d" % (text)
+        else:
+            raise TypeError("text must be an object of one of these classes: BaulichtText, int or str")
 
         return BaulichText(session_bus=self._bus, path=path, namespace=self._namespace)
 
@@ -38,6 +40,8 @@ class BaulichtDbus(object):
             path = text
         elif isinstance(text, int):
             path = "/text/%d" % (text)
+        else:
+            raise TypeError("text must be an object of one of these classes: BaulichtText, int or str")
 
         self._root_object.removeText(path)
 
@@ -95,9 +99,9 @@ class BaulichtDbus(object):
 class BaulichText(object):
 
     def __init__(self, session_bus, path, namespace="de.naptower.Baulicht"):
+        self._bus = session_bus
         self._path = path
         self._namespace = namespace
-        self._bus = session_bus
         self._text_object = self._bus.get_object(self._namespace, self._path)
 
     def __str__(self):
