@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=de.naptower.Baulicht
+Exec=/opt/baulicht/Baulicht
