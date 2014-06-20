@@ -1,7 +1,17 @@
 TEMPLATE = app
+TARGET = baulicht
 CONFIG += console
 QT -= gui
 QT += dbus
+
+INSTALL_DIR = /opt/baulicht
+
+target.path = $$INSTALL_DIR
+
+service.files = de.naptower.Baulicht.service
+service.path = $$INSTALL_DIR
+
+INSTALLS += target service
 
 SOURCES += \
     main.cpp \
@@ -25,4 +35,6 @@ HEADERS += \
     output/onoff_gpio.h \
     dbus/settings.h
 
+OTHER_FILES += \
+    de.naptower.Baulicht.service
 
