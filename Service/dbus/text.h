@@ -17,6 +17,8 @@ public:
     ~Text();
 
 public slots:
+    QString creationTimestamp() const;
+
     void setText(const QString& text);
     QString text() const;
 

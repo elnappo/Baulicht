@@ -1,16 +1,21 @@
 #include "text.h"
 
+#include <QDateTime>
+
 class Text::Private
 {
 public:
     Private()
     : repeat(0)
+    , creationDate(QDateTime::currentDateTime())
     {
     }
 
     // Properties
     QString text;
     int repeat;
+
+    QDateTime creationDate;
 };
 
 Text::Text(QObject *parent)
@@ -22,6 +27,11 @@ Text::Text(QObject *parent)
 Text::~Text()
 {
     delete d;
+}
+
+QString Text::creationTimestamp() const
+{
+    return d->creationDate.toString();
 }
 
 void Text::setText(const QString &text)
