@@ -1,8 +1,9 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
+import os
 import argparse
 
-from baulicht_dbus import BaulichtDbus
+from baulicht_dbus import BaulichtDbus, BaulichSettings
 
 
 if __name__ == "__main__":
@@ -23,23 +24,27 @@ if __name__ == "__main__":
     parser.add_argument("--stop", action="store_true", help="Stop morse/blink")
     args = parser.parse_args()
 
+    os.environ["DISPLAY"] = "=:1"
+
     baulicht = BaulichtDbus()
+    baulicht_settings = BaulichSettings()
 
     if args.status:
-        print("Current System Status:")
         paused = baulicht.paused
         mode = baulicht.mode
-        speed = baulicht.speed
+        speed = baulicht_settings.dit
+        text_spacing = baulicht_settings.text_spacing
+        print("Current System Status:")
         print("Paused: %s" % (paused))
         print("Mode: %s" % (mode))
         print("Speed: %s" % (speed))
+        print("Text Spacing: %s" % (text_spacing))
 
     if args.list:
         for text in baulicht.list_text():
             print(text)
 
     if args.remove:
-
         baulicht.remove_text(args.remove)
 
     if args.add:
@@ -55,9 +60,9 @@ if __name__ == "__main__":
         print("Start morse")
 
     if args.speed:
-        baulicht.speed = args.speed
-        print("Set speed to %d" % (args.speed))
+        baulicht_settings.dit = args.speed
+        print("Set speed to %d" % ( baulicht_settings.dit))
 
     if args.mode:
         baulicht.mode = args.mode
-        print("Set mode to %s" % (args.mode))
+        print("Set mode to %s" % (baulicht.mode))
