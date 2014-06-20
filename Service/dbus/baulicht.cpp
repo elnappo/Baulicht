@@ -19,6 +19,7 @@ public:
     Private()
     : settings(NULL)
     , mode(0)
+    , lastTextId(0)
     , currentTextObject(-1)
     , currentTextPosition(0)
     {
@@ -32,6 +33,8 @@ public:
     int mode;
     bool paused;
     QStringList texts;
+
+    int lastTextId;
 
     QString currentText;
     int currentTextPosition;
@@ -164,7 +167,7 @@ bool Baulicht::paused() const
 
 QString Baulicht::addText(const QString &text, int repeat)
 {
-    QString path = QString("/text/%1").arg(d->texts.size());
+    QString path = QString("/text/%1").arg(lastTextId++);
 
     Text* object = new Text();
     object->setText(text);
