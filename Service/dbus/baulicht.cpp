@@ -167,7 +167,7 @@ bool Baulicht::paused() const
 
 QString Baulicht::addText(const QString &text, int repeat)
 {
-    QString path = QString("/text/%1").arg(lastTextId++);
+    QString path = QString("/text/%1").arg(d->lastTextId++);
 
     Text* object = new Text();
     object->setText(text);
