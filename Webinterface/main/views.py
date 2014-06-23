@@ -4,7 +4,7 @@ from django.views.generic import ListView
 from django.shortcuts import render_to_response
 
 from main.models import Message
-# from main.baulicht_dbus import BaulichtDbus
+# from pybaulicht import BaulichtDbus
 #
 # baulicht = BaulichtDbus()
 #
