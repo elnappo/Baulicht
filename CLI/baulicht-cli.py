@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import argparse
 
-from baulicht_dbus import BaulichtDbus, BaulichSettings
+from pybaulicht import BaulichtDbus, BaulichSettings
 
 
 if __name__ == "__main__":
