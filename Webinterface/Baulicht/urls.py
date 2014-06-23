@@ -4,6 +4,8 @@ from django.views.generic import TemplateView
 from django.contrib import admin
 
 
+admin.autodiscover()
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'Webinterface.views.home', name='home'),
