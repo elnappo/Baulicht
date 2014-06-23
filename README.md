@@ -1,15 +1,9 @@
 # Baulicht
 
-## Service
+## [Service](https://github.com/elnappo/Baulicht/tree/master/Service)
 
-https://github.com/elnappo/Baulicht/tree/master/Service
+## [pybaulicht](https://github.com/elnappo/Baulicht/tree/master/Service)
+A dbus python wrapper
+## [CLI](https://github.com/elnappo/Baulicht/tree/master/CLI)
 
-## Python dBus Wrapper
-
-## CLI
-
-https://github.com/elnappo/Baulicht/tree/master/CLI
-
-## Webinterface & RESTful-API
-
-https://github.com/elnappo/Baulicht/tree/master/Webinterface
+## [Webinterface & RESTful-API](https://github.com/elnappo/Baulicht/tree/master/Webinterface)
