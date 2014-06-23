@@ -2,8 +2,12 @@
 ## Requirements
 * python 2
 * dbus-python
+
 ## Install
+```shell
     $ python setup.py install
+```
+
 ## Usage
 ```python
 from pybaulicht import BaulichtDbus
