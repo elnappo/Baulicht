@@ -24,8 +24,8 @@ class BaulichtDbus(object):
 
         return path
 
-    def add_text(self, message):
-        return self._root_object.addText(message, -1)
+    def add_text(self, text):
+        return self._root_object.addText(text, -1)
 
     def list_text(self):
         texts = list()
@@ -35,7 +35,7 @@ class BaulichtDbus(object):
         return texts
 
     def get_text(self, text):
-        return BaulichText(session_bus=self._bus, path=self._get_text_path(text), namespace=self._namespace)
+        return BaulichText(path=self._get_text_path(text), namespace=self._namespace)
 
     def remove_text(self, text):
         self._root_object.removeText(self._get_text_path(text))
@@ -72,6 +72,7 @@ class BaulichtDbus(object):
     def speed(self, value):
         self._root_object.setSpeed(value)
 
+    # Do mot use property for mode?
     @property
     def mode(self):
         if self._root_object.mode() == 0:
@@ -86,7 +87,7 @@ class BaulichtDbus(object):
         elif value == "text":
             int_value = 0
         else:
-            raise ValueError('Only "text or "blink are allowd!')
+            raise ValueError('Only "text or "blink" are allowed!')
 
         self._root_object.mode(int_value)
 
@@ -118,9 +119,9 @@ class BaulichSettings(object):
 class BaulichText(object):
 
     def __init__(self, path, namespace="de.naptower.Baulicht"):
-        self._bus =  dbus.SessionBus()
-        self.path = path
+        self._bus = dbus.SessionBus()
         self._namespace = namespace
+        self.path = path
         self._text_object = self._bus.get_object(self._namespace, self.path)
 
     def __str__(self):
