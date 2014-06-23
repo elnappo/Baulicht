@@ -48,6 +48,6 @@ void OnOffMorse::setDirection(int pin, const QByteArray &direction)
     if (file.open(QIODevice::WriteOnly)) {
         file.write(direction);
     } else {
-        qDebug() << "Failed to set value on pin:" << file.errorString();
+        qDebug() << "Failed to set direction on pin:" << file.errorString();
     }
 }
