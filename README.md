@@ -2,7 +2,7 @@
 
 ## [Service](https://github.com/elnappo/Baulicht/tree/master/Service)
 
-## [pybaulicht](https://github.com/elnappo/Baulicht/tree/master/Service)
+## [pybaulicht](https://github.com/elnappo/Baulicht/tree/master/pybaulicht)
 A dbus python wrapper
 ## [CLI](https://github.com/elnappo/Baulicht/tree/master/CLI)
 
