@@ -5,7 +5,7 @@ add user to gpio group
     $ qmake -r
     $ make
     $ sudo make install
-    $ sudo usermode -aG gpio pi
+    $ sudo usermod -aG gpio pi
 
     
 ## Morse code
