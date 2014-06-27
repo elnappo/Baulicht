@@ -7,14 +7,14 @@ def to_dbus(modeladmin, request, queryset):
     for message in queryset:
         message.send_to_dbus()
 
-to_dbus.short_description = "Mark selected messages as published"
+to_dbus.short_description = "Send to dBus"
 
 
 def remove_from_dbus(modeladmin, request, queryset):
     for message in queryset:
         message.remove_from_dbus()
 
-remove_from_dbus.short_description = "Mark selected messages as published"
+remove_from_dbus.short_description = "Remove from dBus"
 
 
 class MessageAdmin(admin.ModelAdmin):
