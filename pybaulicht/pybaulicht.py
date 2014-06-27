@@ -129,7 +129,7 @@ class BaulichText(object):
 
     @property
     def text(self):
-        return self._text_object.text
+        return self._text_object.text()
 
     @property
     def repeat(self):
