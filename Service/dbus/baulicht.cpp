@@ -37,8 +37,8 @@ public:
     int lastTextId;
 
     QString currentText;
-    int currentTextPosition;
     int currentTextObject;
+    int currentTextPosition;
 
     BaulichtExecutor executor;
 
