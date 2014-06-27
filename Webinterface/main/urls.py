@@ -11,6 +11,6 @@ urlpatterns = patterns('',
 
     url(r'^create/$', MessageCreate.as_view(), name='create'),
     url(r'^queue/$', Queue.as_view(), name='queue'),
-    # url(r'^active$', 'main.views.active_messeages', name='active'),
+    url(r'^active$', 'main.views.active_messeages', name='active'),
     url(r'^active$', Queue.as_view(), name='active'),
 )

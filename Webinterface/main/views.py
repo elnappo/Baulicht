@@ -22,5 +22,5 @@ class MessageCreate(CreateView):
 
 
 class Queue(ListView):
-    queryset = Message.objects.filter(accepted=False)
+    queryset = Message.objects.filter(accepted=None)
     template_name = "queue.html"
