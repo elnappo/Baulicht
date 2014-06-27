@@ -23,7 +23,7 @@ class MessageAdmin(admin.ModelAdmin):
 
     list_filter = ("name", "email", "accepted", "is_active", "created", )
 
-    actions = [to_dbus, remove_from_dbus()]
+    actions = [to_dbus, remove_from_dbus]
 
 # Register your models here.
 admin.site.register(Message, MessageAdmin)
