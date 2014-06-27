@@ -15,7 +15,12 @@ class QueueList(generics.ListCreateAPIView):
     serializer_class = MessageSerializer
 
 
-class ActiveList(APIView):
-    def get(self, request, format=None):
-        texts = baulicht.list_text()
-        return Response(texts)
+class ActiveList(generics.ListCreateAPIView):
+    queryset = Message.objects.filter(accepted=True)
+    serializer_class = MessageSerializer
+
+
+# class ActiveList(APIView):
+#     def get(self, request, format=None):
+#         texts = baulicht.list_text()
+#         return Response(texts)
