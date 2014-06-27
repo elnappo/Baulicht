@@ -31,6 +31,7 @@ bool GPIOPin::Private::tryExport()
 
     QFile file(path);
     if (file.open(QIODevice::WriteOnly)) {
+        file.write(QString::number(pin).toLatin1());
         return true;
     } else {
         errorString = file.errorString();
