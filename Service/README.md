@@ -1,12 +1,14 @@
 # Service
 ## Install
-add user to gpio group
-
+    $ echo "export DISPAY=:0" > /etc/profile
+    $ sudo apt-get update
+    $ sudo apt-get install libqt4-dev
+    $ sudo usermod -aG gpio pi
+    $ cd Baulicht/Service
     $ qmake -r
     $ make
     $ sudo make install
-    $ sudo usermod -aG gpio pi
-
+    
     
 ## Morse code
 http://www.cl.cam.ac.uk/projects/raspberrypi/tutorials/robot/morse_code/
