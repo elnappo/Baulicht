@@ -22,9 +22,16 @@ public:
     , lastTextId(0)
     , currentTextObject(-1)
     , currentTextPosition(0)
+    , morse(NULL)
     {
         connect(&timer, SIGNAL(timeout()), this, SLOT(timeout()));
         timer.setInterval(300);
+    }
+
+    ~Private()
+    {
+        delete morse;
+        morse = NULL;
     }
 
     // Properties
@@ -45,12 +52,13 @@ public:
     QTimer timer;
     QList<Text*> childTexts;
 
-    OnOffMorse morse;
+    OnOffMorse* morse;
 
 public slots:
     void onPauseChanged();
     void timeout();
     void onDitChanged(int dit);
+    void onPinChanged(int pin);
 };
 
 void Baulicht::Private::onPauseChanged()
@@ -76,7 +84,11 @@ void Baulicht::Private::timeout()
     bool on = (c == '=');
 
     qDebug() << (on ? "on" : "off");
-    morse.setOn(on);
+
+    if (morse == NULL)
+        morse = new OnOffMorse(settings->pin());
+
+    morse->setOn(on);
 
     // Text length exceeded, take the next text
     if (++currentTextPosition >= currentText.size()) {
@@ -99,6 +111,14 @@ void Baulicht::Private::onDitChanged(int dit)
     timer.setInterval(dit);
 }
 
+void Baulicht::Private::onPinChanged(int pin)
+{
+    Q_UNUSED(pin);
+
+    delete morse;
+    morse = NULL;
+}
+
 Baulicht::Baulicht(QObject *parent)
 : QObject(parent)
 , d(new Private)
@@ -118,12 +138,14 @@ void Baulicht::setSettings(Settings *settings)
 
     if (d->settings) {
         disconnect(settings, SIGNAL(ditChanged(int)), d, SLOT(onDitChanged(int)));
+        disconnect(settings, SIGNAL(pinChanged(int)), d, SLOT(onPinChanged(int)));
     }
 
     d->settings = settings;
 
     if (d->settings) {
         connect(settings, SIGNAL(ditChanged(int)), d, SLOT(onDitChanged(int)));
+        connect(settings, SIGNAL(pinChanged(int)), d, SLOT(onPinChanged(int)));
 
         // Update the value immediately
         d->onDitChanged(settings->dit());

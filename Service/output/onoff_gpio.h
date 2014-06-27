@@ -9,7 +9,7 @@
 class OnOffMorse : public MorseOutput
 {
 public:
-    OnOffMorse();
+    OnOffMorse(int pin);
     ~OnOffMorse();
 
     // MorseOutput interface

@@ -2,8 +2,8 @@
 
 #include <QDebug>
 
-OnOffMorse::OnOffMorse()
-: pin(17)
+OnOffMorse::OnOffMorse(int pinNumber)
+: pin(pinNumber)
 {
     pin.setDirection(GPIOPin::Out);
 }
