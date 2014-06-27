@@ -20,11 +20,11 @@ class Message(models.Model):
     activated_at = models.DateTimeField(null=True)
 
     def send_to_dbus(self):
-        self.dbus_path = self.bus.add_text(self.text)
+        self.dbus_path = bus.add_text(self.text)
         self.activated_at = datetime.now()
         self.accepted = True
         self.is_active = True
 
     def remove_from_dbus(self):
-        self.bus.remove_text(self.dbus_path)
+        bus.remove_text(self.dbus_path)
         self.is_active = False
