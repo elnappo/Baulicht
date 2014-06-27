@@ -21,7 +21,8 @@ SOURCES += \
     output/pluginmanager.cpp \
     baulichtexecutor.cpp \
     output/onoff_gpio.cpp \
-    dbus/settings.cpp
+    dbus/settings.cpp \
+    gpiopin.cpp
 
 HEADERS += \
     output/morse.h \
@@ -33,7 +34,8 @@ HEADERS += \
     output/pluginmanager.h \
     baulichtexecutor.h \
     output/onoff_gpio.h \
-    dbus/settings.h
+    dbus/settings.h \
+    gpiopin.h
 
 OTHER_FILES += \
     de.naptower.Baulicht.service
