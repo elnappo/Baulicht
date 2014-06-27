@@ -1,16 +1,11 @@
 #include "settings.h"
 
+#include <QSettings>
+
 class Settings::Private
 {
 public:
-    Private()
-    : dit(200)
-    , textSpacing(dit*10)
-    {
-    }
-
-    int dit;
-    int textSpacing;
+    QSettings settings;
 };
 
 
@@ -27,26 +22,39 @@ Settings::~Settings()
 
 void Settings::setDit(int milliseconds)
 {
-    if (d->dit != milliseconds) {
-        d->dit = milliseconds;
+    if (dit() != milliseconds) {
+        d->settings.setValue("dit", milliseconds);
         emit ditChanged(milliseconds);
     }
 }
 
 int Settings::dit() const
 {
-    return d->dit;
+    return d->settings.value("dit", 200).toInt();
 }
 
 void Settings::setTextSpacing(int milliseconds)
 {
-    if (d->textSpacing != milliseconds) {
-        d->textSpacing = milliseconds;
+    if (textSpacing() != milliseconds) {
+        d->settings.setValue("textSpacing", milliseconds);
         emit textSpacingChanged(milliseconds);
     }
 }
 
 int Settings::textSpacing() const
 {
-    return d->textSpacing;
+    return d->settings.value("textSpacing", dit()*10).toInt();
+}
+
+void Settings::setPin(int pinNumber)
+{
+    if (pin() != pinNumber) {
+        d->settings.setValue("pin", pinNumber);
+        emit pinChanged(pinNumber);
+    }
+}
+
+int Settings::pin() const
+{
+    return d->settings.value("pin", 17).toInt();
 }

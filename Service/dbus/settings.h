@@ -12,6 +12,7 @@ class Settings : public QObject
     Q_CLASSINFO("D-Bus Interface", "de.naptower.Baulicht.Settings")
     Q_PROPERTY(int dit READ dit WRITE setDit NOTIFY ditChanged)
     Q_PROPERTY(int textSpacing READ textSpacing WRITE setTextSpacing NOTIFY textSpacingChanged)
+    Q_PROPERTY(int pin READ pin WRITE setPin NOTIFY pinChanged)
 
 public:
     explicit Settings(QObject *parent = 0);
@@ -32,9 +33,17 @@ public slots:
     void setTextSpacing(int milliseconds);
     int textSpacing() const;
 
+    /**
+     * @brief setPin sets the pin number of the GPIO pin used for morse output
+     * @param pin
+     */
+    void setPin(int pin);
+    int pin() const;
+
 signals:
     void ditChanged(int dit);
     void textSpacingChanged(int textSpacing);
+    void pinChanged(int pin);
 
 protected:
     class Private;

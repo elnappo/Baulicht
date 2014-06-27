@@ -8,6 +8,11 @@
 
 int main(int argc, char* argv[])
 {
+    QCoreApplication::setOrganizationDomain("de.naptower");
+    QCoreApplication::setOrganizationName("Naptower");
+    QCoreApplication::setApplicationName("Baulicht");
+    QCoreApplication::setApplicationVersion("0.1");
+
     QCoreApplication app(argc, argv);
 
     const QString& serviceName = "de.naptower.Baulicht";
@@ -37,6 +42,8 @@ int main(int argc, char* argv[])
         qDebug() << "Failed to register object at /:" << connection.lastError().message();
         return 1;
     }
+
+    qDebug() << "Service" << serviceName << "is up and running";
 
     return app.exec();
 }
