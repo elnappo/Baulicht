@@ -12,6 +12,7 @@
     <thead>
         <tr>
           <th>Name</th>
+          <th>Email</th>
           <th>Nachricht</th>
         </tr>
     </thead>
@@ -25,8 +26,11 @@
             Anonym
         {% endif %}
         </td>
+        <td>{{ object.email }}</td>
         <td>{{ object.text }}</td>
     </tr>
+    {% empty %}
+    <tr>Es warten keine Nachrichten auf ihre Freischaltung.</tr>
     {% endfor %}
     </tbody>
 </table>

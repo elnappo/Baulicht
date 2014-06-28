@@ -10,7 +10,7 @@
     <thead>
         <tr>
           <th>Name</th>
-          <th>Path</th>
+          <th>Email</th>
           <th>Nachricht</th>
         </tr>
     </thead>
@@ -21,6 +21,8 @@
         <td>{{ text.path }}</td>
         <td>{{ text.text }}</td>
     </tr>
+    {% empty %}
+    <tr>Zur Zeit gibt es keine aktiven Nachrichten.</tr>
     {% endfor %}
     </tbody>
 </table>
