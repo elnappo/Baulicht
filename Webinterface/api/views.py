@@ -14,8 +14,11 @@ class QueueList(generics.ListCreateAPIView):
     queryset = Message.objects.filter(accepted=None)
     serializer_class = MessageSerializer
 
+    def pre_save(self, obj):
+        obj.created_ip = self.request.META.get('REMOTE_ADDR')
 
-class ActiveList(generics.ListCreateAPIView):
+
+class ActiveList(generics.ListAPIView):
     queryset = Message.objects.filter(accepted=True)
     serializer_class = MessageSerializer
 
