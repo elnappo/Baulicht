@@ -9,14 +9,15 @@
     <div class="row">
         <div class="col-lg-10 col-md-10">
             <h2>Deine Nachricht</h2>
-            <p>Nach einer Überprüfung wird deine Nachricht über Augsburg gemorst. Alle Felder bis auf "Text" sind freiwillig. Wenn du deinen Namen und/oder deine Email Adresse angibst werden sie auch veröffentlichtt.</p>
+            <p>Nach einer Überprüfung wird deine Nachricht über Augsburg gemorst. <strong>Alle Felder bis auf "Text" sind freiwillig.</strong></p>
+            <div class="alert alert-warning" role="alert">Wenn du deinen Namen und/oder deine Email Adresse angibst werden diese auch veröffentlicht!</div>
             <hr />
             <form class="form-horizontal" role="form" method="post" action="">
                 {% csrf_token %}
                 {{ form|bootstrap_horizontal}}
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <input type="submit" class="btn btn-primary" value="Submit" />
+                        <input type="submit" class="btn btn-primary" value="Senden!" />
                     </div>
                 </div>
             </form>
