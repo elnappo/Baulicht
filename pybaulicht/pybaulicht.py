@@ -108,6 +108,14 @@ class BaulichSettings(object):
         self._settings_object.setDit(value)
 
     @property
+    def pin(self):
+        return self._settings_object.pin()
+
+    @pin.setter
+    def pin(self, value):
+        self._settings_object.setPin(value)
+
+    @property
     def text_spacing(self):
         return self._settings_object.textSpacing()
 

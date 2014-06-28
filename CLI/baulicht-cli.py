@@ -18,6 +18,7 @@ if __name__ == "__main__":
     parser.add_argument("-s", "--speed", type=int, metavar='<int>', help="length of a dit in ms")
     parser.add_argument("-b", "--blink", nargs="?", metavar='<list<int>>', help="Set blink interval")
     parser.add_argument("-p", "--pause", choices=["on", "off"], help="Stop morse/blink")
+    parser.add_argument("--pin", type=int, metavar='<int>', help="Set GPIO Pin")
     parser.add_argument("--status", action="store_true", help="Show current status")
     parser.add_argument("--start", action="store_true", help="Start morse/blink")
     parser.add_argument("--stop", action="store_true", help="Stop morse/blink")
@@ -30,11 +31,13 @@ if __name__ == "__main__":
         paused = baulicht.paused
         mode = baulicht.mode
         speed = baulicht_settings.dit
+        pin = baulicht_settings.pin
         text_spacing = baulicht_settings.text_spacing
         print("Current System Status:")
         print("Paused: %s" % (paused))
         print("Mode: %s" % (mode))
         print("Speed: %s" % (speed))
+        print("GPIO pin: %s" % (pin))
         print("Text Spacing: %s" % (text_spacing))
 
     if args.list:
@@ -58,8 +61,12 @@ if __name__ == "__main__":
 
     if args.speed:
         baulicht_settings.dit = args.speed
-        print("Set speed to %d" % ( baulicht_settings.dit))
+        print("Speed is now %d" % (baulicht_settings.dit))
 
     if args.mode:
         baulicht.mode = args.mode
         print("Set mode to %s" % (baulicht.mode))
+
+    if args.pin:
+        baulicht_settings.pin = args.pin
+        print("GPIO pin is now %d" % (baulicht_settings.pin))
