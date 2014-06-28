@@ -21,6 +21,12 @@ class MessageCreate(CreateView):
     success_url = reverse_lazy('messages:queue')
 
 
-class Queue(ListView):
+class QueueList(ListView):
     queryset = Message.objects.filter(accepted=None)
-    template_name = "queue.html"
+    template_name = "queue_list.html"
+
+
+class ActiveList(ListView):
+    queryset = Message.objects.filter(accepted=True)
+    template_name = "active_list.html"
+

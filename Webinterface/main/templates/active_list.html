@@ -18,14 +18,22 @@
         </tr>
     </thead>
     <tbody>
-    {% for text in texts %}
+    {% for object in object_list %}
     <tr>
-        <td></td>
-        <td>{{ text.path }}</td>
-        <td>{{ text.text }}</td>
+        <td>
+        {% if object.name %}
+            {{ object.name }}
+        {% else %}
+            Anonym
+        {% endif %}
+        </td>
+        <td>{{ object.email }}</td>
+        <td>{{ object.text }}</td>
     </tr>
     {% empty %}
-    <tr>Zur Zeit gibt es keine aktiven Nachrichten.</tr>
+    <tr>
+        <td>Zur Zeit gibt es keine aktiven Nachrichten.</td>
+    </tr>
     {% endfor %}
     </tbody>
 </table>
