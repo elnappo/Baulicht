@@ -6,7 +6,7 @@ except ImportError:
 
 setup(
     name='Baulicht',
-    version='0.1.1',
+    version='0.2.0',
     description='dbus wrapper for Baulicht project',
     install_requires=['dbus-python'],
     py_modules=['pybaulicht'],
