@@ -16,7 +16,7 @@ public class QueueFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mListAdapter.setUrl(Urls.QUEUE_URL);
+        mListAdapter.setUrl(mSettings.formatUrl("/queue"));
     }
 
     @Override

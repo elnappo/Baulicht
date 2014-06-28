@@ -20,6 +20,7 @@ import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
 
 public class BaseFragment extends ListFragment implements JSONListAdapter.Delegate, OnRefreshListener {
 
+    protected Settings mSettings;
     protected JSONListAdapter mListAdapter;
     protected PullToRefreshLayout mPullToRefreshLayout;
     protected ProgressBar mProgressBar;
@@ -31,6 +32,8 @@ public class BaseFragment extends ListFragment implements JSONListAdapter.Delega
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mSettings = new Settings(getActivity());
 
         mListAdapter = new JSONListAdapter(getActivity());
         mListAdapter.setDelegate(this);

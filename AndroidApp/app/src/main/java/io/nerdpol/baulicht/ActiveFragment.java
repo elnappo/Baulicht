@@ -12,6 +12,6 @@ public class ActiveFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mListAdapter.setUrl(Urls.ACTIVE_URL);
+        mListAdapter.setUrl(mSettings.formatUrl("/active"));
     }
 }

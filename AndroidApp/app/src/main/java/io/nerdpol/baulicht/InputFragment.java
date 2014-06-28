@@ -34,6 +34,7 @@ public class InputFragment extends Fragment {
     protected EditText textField;
     protected EditText nameField;
     protected Button button;
+    protected Settings settings;
 
     public InputFragment() {
         // Required empty public constructor
@@ -51,6 +52,8 @@ public class InputFragment extends Fragment {
         textField = (EditText)view.findViewById(R.id.text);
         nameField = (EditText)view.findViewById(R.id.name);
         button = (Button)view.findViewById(R.id.button);
+
+        settings = new Settings(getActivity());
 
         final View contextView = view;
 
@@ -114,7 +117,7 @@ public class InputFragment extends Fragment {
                     }
                 };
 
-                task.execute(Urls.INSERT_URL);
+                task.execute(settings.formatUrl("/queue"));
             }
         });
     }
