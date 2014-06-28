@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url
 from django.contrib.auth.decorators import login_required
 
-from main.views import MessageCreate, QueueList
+from main.views import MessageCreate, QueueList, ActiveList
 
 
 urlpatterns = patterns('',
