@@ -14,9 +14,7 @@ if __name__ == "__main__":
     parser.add_argument("-l", "--list", action='store_true', help="List all active texts")
     parser.add_argument("-a", "--add", type=str, metavar='<string>', help="Add Text to morse")
     parser.add_argument("-r", "--remove", type=int, metavar='<int>', help="Remove Text by ID")
-    parser.add_argument("-m", "--mode", choices=["text", "blink"], help="Set mode to text or blink")
     parser.add_argument("-s", "--speed", type=int, metavar='<int>', help="length of a dit in ms")
-    parser.add_argument("-b", "--blink", nargs="?", metavar='<list<int>>', help="Set blink interval")
     parser.add_argument("-p", "--pause", choices=["on", "off"], help="Stop morse/blink")
     parser.add_argument("--pin", type=int, metavar='<int>', help="Set GPIO Pin")
     parser.add_argument("--status", action="store_true", help="Show current status")
@@ -62,10 +60,6 @@ if __name__ == "__main__":
     if args.speed:
         baulicht_settings.dit = args.speed
         print("Speed is now %d" % (baulicht_settings.dit))
-
-    if args.mode:
-        baulicht.mode = args.mode
-        print("Set mode to %s" % (baulicht.mode))
 
     if args.pin:
         baulicht_settings.pin = args.pin
