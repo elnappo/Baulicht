@@ -72,25 +72,6 @@ class BaulichtDbus(object):
     def speed(self, value):
         self._root_object.setSpeed(value)
 
-    # Do mot use property for mode?
-    @property
-    def mode(self):
-        if self._root_object.mode() == 0:
-            return "text"
-        elif self._root_object.mode() == 1:
-            return "blink"
-
-    @mode.setter
-    def mode(self, value):
-        if value == "blink":
-            int_value = 1
-        elif value == "text":
-            int_value = 0
-        else:
-            raise ValueError('Only "text or "blink" are allowed!')
-
-        self._root_object.mode(int_value)
-
 
 class BaulichSettings(object):
     def __init__(self, path="/settings", namespace="de.naptower.Baulicht"):
